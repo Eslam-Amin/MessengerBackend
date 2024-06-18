@@ -44,6 +44,10 @@ io.on("connection", (socket) => {
         addUser(user, socket.id);
         io.emit("getOnlineUsers", users)
     });
+    socket.on("removeUser", user => {
+        removeUser(user, socket.id);
+        io.emit("getOnlineUsers", users)
+    });
 
 
     //send and get message
