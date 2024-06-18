@@ -4,9 +4,9 @@ const app = express()
 const server = http.createServer(app);
 
 const io = require("socket.io")(server, {
-
     cors: {
-        origin: "*"
+        origin: "*", // Allow connections from any origin
+        methods: ["GET", "POST"]
     }
 });
 const PORT = process.env.PORT || 4000;
