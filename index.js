@@ -1,9 +1,16 @@
+const express = require("express")
+const http = require("http");
+const app = express()
+const server = http.createServer(app);
 
-const io = require("socket.io")(8900, {
+const io = require("socket.io")(server, {
+
     cors: {
         origin: "*"
     }
 });
+const PORT = process.env.PORT || 4000;
+
 
 let users = [];
 
@@ -60,3 +67,9 @@ io.on("connection", (socket) => {
         removeUser(socket.id)
     })
 })
+
+app.get("/", (req, res) => {
+    res.send("socket.io server is running");
+})
+
+server.listen(PORT, () => console.log("Server is up & running!"))
